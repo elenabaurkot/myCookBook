@@ -10,7 +10,17 @@ function getDrinkRecipe() {
 
   fetch(queryURL)
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      // Stores array of returned drinks in drinks variable
+      let drinks = data.drinks;
+      drinks.forEach((drink) => {
+        console.log(drink);
+        console.log(drink.strDrink);
+        for (let i = 1; i < 15; i++) {
+          console.log(drink['strIngredient' + i]);
+        }
+      });
+    });
 }
 
 // Click events

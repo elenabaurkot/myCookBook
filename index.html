@@ -11,17 +11,18 @@
   <body class="text-center">
     <nav class="navbar bg-dark text-light">My Cookbook</nav>
     <div id="search">
+      <label for="recipe-type">Are you searching for a drink or food recipe?</label>
+      <select>
+        <option value="food">Food Recipe</option>
+        <option value="drink">Drink Recipe</option>
+      </select>
+
       <h6>Search for a Recipe: </h6>
       <input id="drink-search" placeholder="Type a recipe"></input>
       <button id="search-button">Search!</button>
     </div>
     <div class="flex-container">
-      <div id="recipe-return">
-      <!-- <h5 id="recipe-title"></h5>
-      <div id="ingredients"></div>
-      <div id="description"></div>
-      <div id="image-spot"></div> -->
-      </div>
+      <div id="recipe-return"></div>
     </div>
     <!-- link to scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

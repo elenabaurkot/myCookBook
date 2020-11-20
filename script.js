@@ -4,7 +4,9 @@ var searchButton = $('#search-button');
 let recipeContainer = $('#recipe-return');
 
 // function to get drink user searched for
-function getDrinkRecipe() {
+function getDrinkRecipe(event) {
+  event.preventDefault();
+
   let drinkSearched = drinkInput.val();
   let queryURL =
     'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + drinkSearched;

@@ -10,17 +10,20 @@
   </head>
   <body class="text-center">
     <nav class="navbar bg-dark text-light">My Cookbook</nav>
-    <div id="search">
-      <label for="recipe-type">Are you searching for a drink or food recipe?</label>
-      <select>
-        <option value="food">Food Recipe</option>
-        <option value="drink">Drink Recipe</option>
-      </select>
+    <form id="search" class="mt-5">
+      <p class="form-header mb-1">Are you searching for a drink or food recipe?</p>
+      <label class='radio-inline'>
+        <input type="radio" id="food" name="recipe-select" value="food"><p class="d-inline ml-2 mr-3">Food</p>
+      </label>
+      <label class="radio-inline">
+        <input type="radio" id="drink" name="recipe-select" value="drink"><p class="d-inline ml-2">Drink</p>
+      </label>
+      <br>
 
-      <h6>Search for a Recipe: </h6>
-      <input id="drink-search" placeholder="Type a recipe"></input>
+      <label for="drink-search" class="form-header mt-2">Search for a Recipe:</label><br>
+      <input id="drink-search" name="drink-search" placeholder="Type a recipe"></input>
       <button id="search-button">Search!</button>
-    </div>
+    </form>
     <div class="flex-container">
       <div id="recipe-return"></div>
     </div>

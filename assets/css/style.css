@@ -1,3 +1,10 @@
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+
 .flex-container {
   display: flex;
   justify-content: space-evenly;
@@ -23,4 +30,8 @@
 .form-header {
   font-weight: bold;
   font-size: large;
+}
+
+form {
+  margin-right: 10px;
 }

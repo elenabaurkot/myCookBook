@@ -33,30 +33,32 @@
     </div>
   </div>
 </nav>
-<!-- Page Header -->
-<main class="container-fluid">
-  <header class="row jumbotron bg-dark text-light">
-    <h1 class="p-5">My Cookbook</h1>
-  </header>
+  <!-- Page Header -->
+  <main class="container-fluid">
+    <header class="row jumbotron bg-dark text-light">
+      <h1 class="p-3">My Cookbook</h1>
+    </header>
 
   <!-- Search Form -->
-  <div class="row justify-content-center">
-       <form id="search" class="col-sm-11 col-md-8 col-lg-6 mt-5 text-center border border-secondary rounded py-4 px-2">
-      <p class="form-header mb-1">Are you searching for a drink or food recipe?</p>
-      <label class='radio-inline'>
-        <input type="radio" id="food" name="recipe-select" value="food"><p class="d-inline ml-2 mr-3">Food</p>
-      </label>
-      <label class="radio-inline">
-        <input type="radio" id="drink" name="recipe-select" value="drink"><p class="d-inline ml-2">Drink</p>
-      </label>
-      <br>
+    <div class="row justify-content-center">
+      <form id="search" class="col-sm-11 col-md-8 col-lg-6 mt-5 text-center border border-secondary py-4 px-2">
+        <p class="form-header mb-1">Are you searching for a drink or food recipe?</p>
+        <label class='radio-inline'>
+          <input type="radio" id="food" name="recipe-select" value="food">
+          <p class="d-inline pl-2 mr-3 input-text">Food</p>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" id="drink" name="recipe-select" value="drink">
+          <p class="d-inline pl-2 input-text">Drink</p>
+        </label>
+        <br>
 
-      <label for="drink-search" class="form-header mt-2">Search for a Recipe:</label><br>
-      <input id="drink-search" name="drink-search" placeholder="Type a recipe"></input>
-      <button id="search-button">Search!</button>
-    </form>
+        <label for="drink-search" class="form-header mt-2">Search for a Recipe:</label><br>
+        <input id="drink-search" name="drink-search" placeholder="Type a recipe"></input>
+        <button id="search-button">Search!</button>
+      </form>
 
-  </div>
+    </div>
 
  
     <!-- Container for recipes to show after search -->
@@ -64,7 +66,7 @@
       <div id="recipe-return"></div>
     </div>
 
-</main>
+  </main>
     
     <!-- link to scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

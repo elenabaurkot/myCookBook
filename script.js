@@ -1,13 +1,13 @@
 // Global Variables
-var drinkInput = $("#drink-search");
-var searchButton = $("#search-button");
-let recipeContainer = $("#recipe-return");
+var userSearch = document.getElementById("drink-search");
+var searchButton = document.getElementById("search-button");
+let recipeContainer = document.getElementById("recipe-return");
 
 // function to get drink user searched for
 function getDrinkRecipe(event) {
   event.preventDefault();
 
-  let drinkSearched = drinkInput.val();
+  let drinkSearched = userSearch.value;
   let queryURL =
     "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkSearched;
 
@@ -15,6 +15,7 @@ function getDrinkRecipe(event) {
     .then((response) => response.json())
     .then((data) => {
       // Stores array of returned drinks in drinks variable
+      console.log(data);
       let drinks = data.drinks;
 
       drinks.forEach((drink) => {
@@ -42,25 +43,48 @@ function getDrinkRecipe(event) {
     });
 }
 
-function getFoodRecipe() {
-  let queryURL =
-    "https://api.spoonacular.com/recipes/complexSearch?query=spaghetti&apiKey=fb8f9820c9b74cf1ac411198c8a4e4a0&number=5";
+const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum) {
+  console.log(rTitle);
+  console.log(rSteps);
+  console.log(rIngred);
+  console.log(rImg);
+  console.log(rSum);
+};
+
+// Loop through results
+// Get the description, ingredients and instructions
+// Print them to the page
+const getRecipeData = function (dataArr) {
+  for (let i = 0; i < dataArr.length; i++) {
+    let title = dataArr[i].title;
+    let steps = dataArr[i].analyzedInstructions[0].steps;
+    let ingredients = dataArr[i].missedIngredients;
+    let imageURL = dataArr[i].image;
+    let summary = dataArr[i].summary;
+
+    printRecipeData(title, steps, ingredients, imageURL, summary);
+  }
+};
+
+const getRecipes = function (event) {
+  event.preventDefault();
+
+  // Get user input
+  let searchTerm = userSearch.value;
+  console.log(searchTerm);
+
+  // query url
+  let queryURL = `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&fillIngredients=true&addRecipeInformation=true&apiKey=fb8f9820c9b74cf1ac411198c8a4e4a0&number=5`;
 
   fetch(queryURL)
     .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      // const recipes = data.hits;
+    .then(({ results }) => {
+      console.log(results);
 
-      // for (let i = 0; i < recipes.length; i++) {
-      //   console.log(recipes[i].recipe.label);
-      // }
+      getRecipeData(results);
     });
-
-  // let queryURL1 = "https://api.spoonacular.com/recipes";
-}
-
-getFoodRecipe();
+};
 
 // Click events
-searchButton.on("click", getDrinkRecipe);
+// searchButton.on("click", getDrinkRecipe);
+searchButton.addEventListener("click", getRecipes);

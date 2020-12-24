@@ -5,6 +5,10 @@
   border-radius: 0.3rem;
 }
 
+nav {
+  background: rgb(141, 124, 124);
+}
+
 .flex-container {
   display: flex;
   justify-content: space-evenly;

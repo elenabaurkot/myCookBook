@@ -44,11 +44,20 @@ function getDrinkRecipe(event) {
 
 function getFoodRecipe() {
   let queryURL =
-    "https://api.edamam.com/search?q=spaghetti&app_id=4db3d7fd&app_key=3475be3b40eea6987b6f909f7c1ff553";
+    "https://api.spoonacular.com/recipes/complexSearch?query=spaghetti&apiKey=fb8f9820c9b74cf1ac411198c8a4e4a0&number=5";
 
   fetch(queryURL)
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      console.log(data);
+      // const recipes = data.hits;
+
+      // for (let i = 0; i < recipes.length; i++) {
+      //   console.log(recipes[i].recipe.label);
+      // }
+    });
+
+  // let queryURL1 = "https://api.spoonacular.com/recipes";
 }
 
 getFoodRecipe();

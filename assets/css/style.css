@@ -41,3 +41,17 @@ form {
   margin-left: 5px;
   margin-right: 15px;
 }
+
+header {
+  border-radius: 0.1rem !important;
+  letter-spacing: 5px;
+  font-family: "Bungee Outline", cursive;
+}
+
+.main-header {
+  width: fit-content;
+}
+
+.main-header::first-letter {
+  font-size: 1.2em;
+}

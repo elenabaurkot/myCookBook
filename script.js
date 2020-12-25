@@ -44,11 +44,19 @@ function getDrinkRecipe(event) {
 }
 
 const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum) {
-  console.log(rTitle);
-  console.log(rSteps);
-  console.log(rIngred);
-  console.log(rImg);
-  console.log(rSum);
+  let recTitle = rTitle;
+  let steps = rSteps.forEach((recipeStep) => console.log(recipeStep.step));
+  let ingredients = rIngred.forEach((ingredient) =>
+    console.log(ingredient.originalString)
+  );
+  let recipeImage = rImg;
+  let summary = rSum;
+
+  console.log(`TITLE = ${recTitle}`);
+  console.log(`STEPS = \n ${steps}`);
+  console.log(`INGREDIENTS = \n ${ingredients}`);
+  console.log(`IMAGEURL = ${recipeImage}`);
+  console.log(`SUMMARY = ${summary}`);
 };
 
 // Loop through results
@@ -71,7 +79,7 @@ const getRecipes = function (event) {
 
   // Get user input
   let searchTerm = userSearch.value;
-  console.log(searchTerm);
+  // console.log(searchTerm);
 
   // query url
   let queryURL = `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&fillIngredients=true&addRecipeInformation=true&apiKey=fb8f9820c9b74cf1ac411198c8a4e4a0&number=5`;
@@ -79,12 +87,10 @@ const getRecipes = function (event) {
   fetch(queryURL)
     .then((response) => response.json())
     .then(({ results }) => {
-      console.log(results);
-
+      // console.log(results);
       getRecipeData(results);
     });
 };
 
 // Click events
-// searchButton.on("click", getDrinkRecipe);
 searchButton.addEventListener("click", getRecipes);

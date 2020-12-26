@@ -4,6 +4,7 @@ html {
   padding: 0;
 }
 
+/* Jumbotron Styling */
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
@@ -11,8 +12,39 @@ html {
   border-radius: 0.3rem;
 }
 
+header {
+  border-radius: 0.1rem !important;
+  letter-spacing: 5px;
+  font-family: "Bungee Outline", cursive;
+}
+
+.main-header {
+  width: fit-content;
+}
+
+.main-header::first-letter {
+  font-size: 1.2em;
+}
+
+/* Navbar Styling */
 nav {
   background: rgb(141, 124, 124);
+}
+
+/* Search Form  */
+.form-header {
+  font-weight: bold;
+  font-size: large;
+}
+
+form {
+  margin-right: 10px;
+  border-radius: 22px;
+}
+
+.input-text {
+  margin-left: 5px;
+  margin-right: 15px;
 }
 
 .flex-container {
@@ -31,37 +63,9 @@ nav {
   margin: 5px;
 }
 
-.drinkName {
+/* .drinkName {
   font-size: 20px;
   text-decoration: underline;
   text-align: center;
 }
-
-.form-header {
-  font-weight: bold;
-  font-size: large;
-}
-
-form {
-  margin-right: 10px;
-  border-radius: 22px;
-}
-
-.input-text {
-  margin-left: 5px;
-  margin-right: 15px;
-}
-
-header {
-  border-radius: 0.1rem !important;
-  letter-spacing: 5px;
-  font-family: "Bungee Outline", cursive;
-}
-
-.main-header {
-  width: fit-content;
-}
-
-.main-header::first-letter {
-  font-size: 1.2em;
-}
+*/

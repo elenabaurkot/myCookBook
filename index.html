@@ -19,56 +19,41 @@
       <h1 class="p-3 ml-3 main-header mx-auto">My Cookbook</h1>
     </header>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom border-light w-100">
-      <div class="container-fluid text-center w-100">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="w-100 mx-2">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 justify-content-around text-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">My Recipes</a>
+              <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">My Cookbook</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Search Recipes</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
         </div>
-  </div>
+      </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="container-fluid">
       <!-- Search Form -->
         <div class="row justify-content-center">
           <form id="search" class="col-sm-11 col-md-8 col-lg-6 mt-5 text-center border border-secondary py-4 px-2">
-            <p class="form-header mb-1">Are you searching for a drink or food recipe?</p>
-            <label class='radio-inline'>
-              <input type="radio" id="food" name="recipe-select" value="food">
-              <p class="d-inline pl-2 mr-3 input-text">Food</p>
-            </label>
-            <label class="radio-inline">
-              <input type="radio" id="drink" name="recipe-select" value="drink">
-              <p class="d-inline pl-2 input-text">Drink</p>
-            </label>
-            <br>
-
-            <label for="drink-search" class="form-header mt-2">Search for a Recipe:</label><br>
-            <input id="drink-search" name="drink-search" placeholder="Type a recipe"></input>
+            <label for="drink-search" class="form-header my-2">Search for a Recipe:</label><br>
+            <input class="w-50" id="drink-search" name="drink-search" placeholder="Type a recipe"></input>
             <button id="search-button">Search!</button>
           </form>
-
         </div>
-
-    
         <!-- Container for recipes to show after search -->
         <div class="flex-container">
           <div id="recipe-return"></div>
         </div>
-
       </main>
     
     <!-- link to scripts -->

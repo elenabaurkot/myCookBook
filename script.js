@@ -3,46 +3,7 @@ var userSearch = $("#drink-search");
 var searchButton = $("#search-button");
 let recipeContainer = $("#recipe-return");
 
-// function to get drink user searched for
-function getDrinkRecipe(event) {
-  event.preventDefault();
-
-  let drinkSearched = userSearch.val();
-  let queryURL =
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkSearched;
-
-  fetch(queryURL)
-    .then((response) => response.json())
-    .then((data) => {
-      // Stores array of returned drinks in drinks variable
-      console.log(data);
-      let drinks = data.drinks;
-
-      drinks.forEach((drink) => {
-        let drinkName = $("<p>").text(drink.strDrink);
-        let instructions = drink.strInstructions;
-        let recipeDiv = $("<div>");
-
-        drinkName.addClass("drinkName");
-
-        recipeDiv
-          .addClass("recipeDiv")
-          .append(drinkName)
-          .append(instructions)
-          .append("Drink Ingredients: ");
-
-        // Get drink ingredients
-        for (let i = 1; i < 15; i++) {
-          let ingredient = drink["strIngredient" + i];
-          if (ingredient != null) {
-            recipeDiv.append(ingredient);
-          }
-        }
-        recipeContainer.append(recipeDiv);
-      });
-    });
-}
-
+// Function to print Recipe Data to DOM
 const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
   let recTitle = rTitle;
   let steps = rSteps;
@@ -50,15 +11,26 @@ const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
   let recipeImage = rImg;
   let summary = rSum;
   let time = rTime;
+  // Create div to make a card for each recipe
+  let recipeCard = $("<div>");
+  // Add image to the card
+  let cardImg = $("<div>");
+  cardImg
+    .css("background-image", "url(" + recipeImage + ")")
+    .addClass("card-img");
+  // Create card-text div
+  let cardText = $("<div>").addClass("card-text");
+  // Add Recipe Title to Card
+  let cardTitle = $("<div>").addClass("card-title").text(recTitle);
+  // Create buttons for card
+  let saveBtn = $("<button>").addClass("recipe-btn").text("Save Recipe");
+  let infoBtn = $("<button>").addClass("recipe-btn").text("Recipe Info");
+  // Append Recipe Title and Buttons to cardTitle Div
+  cardText.append(cardTitle, saveBtn, infoBtn);
 
-  let recipeName = $("<p>");
-  recipeName.text(recTitle).addClass("recipe-name");
-  // recipeContainer.appendChild(recipeName);
+  recipeCard.addClass("recipe-card").append(cardImg).append(cardText);
 
-  let recipeDiv = $("<div>");
-  recipeDiv.addClass("recipe-div").append(recipeName);
-
-  recipeContainer.append(recipeDiv);
+  recipeContainer.append(recipeCard);
   // .append(drinkName)
   // .append(instructions)
   // .append("Drink Ingredients: ");

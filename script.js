@@ -23,17 +23,18 @@ const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
   // Add Recipe Title to Card
   let cardTitle = $("<div>").addClass("card-title").text(recTitle);
   // Create buttons for card
-  let saveBtn = $("<button>").addClass("recipe-btn").text("Save Recipe");
-  let infoBtn = $("<button>").addClass("recipe-btn").text("Recipe Info");
+  let saveBtn = $("<button>")
+    .addClass("recipe-btn save-btn")
+    .text("Save Recipe");
+  let infoBtn = $("<button>")
+    .addClass("recipe-btn info-btn")
+    .text("Recipe Info");
   // Append Recipe Title and Buttons to cardTitle Div
   cardText.append(cardTitle, saveBtn, infoBtn);
 
   recipeCard.addClass("recipe-card").append(cardImg).append(cardText);
 
   recipeContainer.append(recipeCard);
-  // .append(drinkName)
-  // .append(instructions)
-  // .append("Drink Ingredients: ");
 
   // rSteps.forEach((recipeStep) => console.log(recipeStep.step));
   // rIngred.forEach((ingredient) => console.log(ingredient.originalString));
@@ -62,9 +63,9 @@ const getRecipeData = function (dataArr) {
   }
 };
 
+// Recipe Search with API Call
 const getRecipes = function (event) {
   event.preventDefault();
-
   // Get user input
   let searchTerm = userSearch.val();
   // console.log(searchTerm);
@@ -80,5 +81,30 @@ const getRecipes = function (event) {
     });
 };
 
+const infoClick = function () {
+  alert("get info");
+  // To Do
+  // Make modal that pops up with clicked recipe info
+  // Should have recipe time, instructions, ingredients, maybe pic too?
+};
+
+const saveRecipe = function () {
+  alert("save this recipe!");
+  // console.log(this);
+  // Need some database for this part to actually save to your cookbook
+};
+
+const buttonClicks = function (event) {
+  event.preventDefault();
+  if (event.target.matches(".info-btn")) {
+    infoClick();
+  }
+
+  if (event.target.matches(".save-btn")) {
+    saveRecipe();
+  }
+};
+
 // Click events
 searchButton.on("click", getRecipes);
+recipeContainer.on("click", buttonClicks);

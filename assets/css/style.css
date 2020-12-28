@@ -47,25 +47,26 @@ form {
   margin-right: 15px;
 }
 
-.flex-container {
+/* Recipe return styling */
+#recipe-return {
   display: flex;
-  justify-content: space-evenly;
+  flex-grow: 3;
+  justify-content: space-around !important;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.recipeDiv {
+.recipe-div {
   display: inline-flex;
-  flex-direction: column;
-  background-color: red;
+  background-color: grey;
   margin-bottom: 20px;
   width: 300px;
-  height: 400px;
+  height: 300px;
   margin: 5px;
 }
 
-/* .drinkName {
+.recipe-name {
   font-size: 20px;
   text-decoration: underline;
   text-align: center;
 }
-*/

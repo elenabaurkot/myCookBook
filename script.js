@@ -1,27 +1,30 @@
 // Global Variables
-var userSearch = $("#drink-search");
 var searchButton = $("#search-button");
 let recipeContainer = $("#recipe-return");
 
-// Function to print Recipe Data to DOM
-const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
-  let recTitle = rTitle;
-  let steps = rSteps;
-  let ingredients = rIngred;
-  let recipeImage = rImg;
-  let summary = rSum;
-  let time = rTime;
+// Recipe class constructor
+function Recipe(title, steps, ingredients, imgUrl, summary, time) {
+  this.title = title;
+  this.steps = steps;
+  this.ingredients = ingredients;
+  this.imgUrl = imgUrl;
+  this.summary = summary;
+  this.time = time;
+}
+
+//
+Recipe.prototype.printRecipeData = function () {
   // Create div to make a card for each recipe
   let recipeCard = $("<div>");
   // Add image to the card
   let cardImg = $("<div>");
   cardImg
-    .css("background-image", "url(" + recipeImage + ")")
+    .css("background-image", "url(" + this.imgUrl + ")")
     .addClass("card-img");
   // Create card-text div
   let cardText = $("<div>").addClass("card-text");
   // Add Recipe Title to Card
-  let cardTitle = $("<div>").addClass("card-title").text(recTitle);
+  let cardTitle = $("<div>").addClass("card-title").text(this.title);
   // Create buttons for card
   let saveBtn = $("<button>")
     .addClass("recipe-btn save-btn")
@@ -35,31 +38,25 @@ const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
   recipeCard.addClass("recipe-card").append(cardImg).append(cardText);
 
   recipeContainer.append(recipeCard);
-
-  // rSteps.forEach((recipeStep) => console.log(recipeStep.step));
-  // rIngred.forEach((ingredient) => console.log(ingredient.originalString));
-
-  console.log(`TITLE = ${recTitle}`);
-  console.log(`STEPS = \n ${steps}`);
-  console.log(`INGREDIENTS = \n ${ingredients}`);
-  console.log(`IMAGEURL = ${recipeImage}`);
-  console.log(`SUMMARY = ${summary}`);
-  console.log(`Time = ${time}`);
 };
+// rSteps.forEach((recipeStep) => console.log(recipeStep.step));
+// rIngred.forEach((ingredient) => console.log(ingredient.originalString));
 
 // Loop through results
 // Get the description, ingredients and instructions
 // Print them to the page
 const getRecipeData = function (dataArr) {
   for (let i = 0; i < dataArr.length; i++) {
-    let title = dataArr[i].title;
-    let steps = dataArr[i].analyzedInstructions[0].steps;
-    let ingredients = dataArr[i].missedIngredients;
-    let imageURL = dataArr[i].image;
-    let summary = dataArr[i].summary;
-    let time = dataArr[i].readyInMinutes;
+    let recipe = new Recipe(
+      dataArr[i].title,
+      dataArr[i].analyzedInstructions[0].steps,
+      dataArr[i].missedIngredients,
+      dataArr[i].image,
+      dataArr[i].summary,
+      dataArr[i].readyInMinutes
+    );
 
-    printRecipeData(title, steps, ingredients, imageURL, summary, time);
+    recipe.printRecipeData();
   }
 };
 

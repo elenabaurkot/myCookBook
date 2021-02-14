@@ -3,25 +3,35 @@ var userSearch = $("#drink-search");
 var searchButton = $("#search-button");
 let recipeContainer = $("#recipe-return");
 
-// Function to print Recipe Data to DOM
-const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
-  let recTitle = rTitle;
-  let steps = rSteps;
-  let ingredients = rIngred;
-  let recipeImage = rImg;
-  let summary = rSum;
-  let time = rTime;
+// Recipe class constructor
+function Recipe(id, title, steps, ingredients, imgUrl, summary, time) {
+  this.id = id;
+  this.title = title;
+  this.steps = steps;
+  this.ingredients = ingredients;
+  this.imgUrl = imgUrl;
+  this.summary = summary;
+  this.time = time;
+}
+
+//
+Recipe.prototype.printRecipeData = function (recipe) {
   // Create div to make a card for each recipe
   let recipeCard = $("<div>");
   // Add image to the card
   let cardImg = $("<div>");
   cardImg
-    .css("background-image", "url(" + recipeImage + ")")
+    .css("background-image", "url(" + this.imgUrl + ")")
     .addClass("card-img");
   // Create card-text div
-  let cardText = $("<div>").addClass("card-text");
+  let cardText = $("<div>");
+  cardText.attr("id", `${this.id}`).addClass("card-text");
+  cardText.data(`${this.title}`, recipe);
   // Add Recipe Title to Card
-  let cardTitle = $("<div>").addClass("card-title").text(recTitle);
+  let cardTitle = $("<div>")
+    .data(`${this.id}`, this)
+    .addClass("card-title")
+    .text(this.title);
   // Create buttons for card
   let saveBtn = $("<button>")
     .addClass("recipe-btn save-btn")
@@ -35,31 +45,26 @@ const printRecipeData = function (rTitle, rSteps, rIngred, rImg, rSum, rTime) {
   recipeCard.addClass("recipe-card").append(cardImg).append(cardText);
 
   recipeContainer.append(recipeCard);
-
   // rSteps.forEach((recipeStep) => console.log(recipeStep.step));
   // rIngred.forEach((ingredient) => console.log(ingredient.originalString));
-
-  console.log(`TITLE = ${recTitle}`);
-  console.log(`STEPS = \n ${steps}`);
-  console.log(`INGREDIENTS = \n ${ingredients}`);
-  console.log(`IMAGEURL = ${recipeImage}`);
-  console.log(`SUMMARY = ${summary}`);
-  console.log(`Time = ${time}`);
 };
 
 // Loop through results
-// Get the description, ingredients and instructions
-// Print them to the page
 const getRecipeData = function (dataArr) {
   for (let i = 0; i < dataArr.length; i++) {
-    let title = dataArr[i].title;
-    let steps = dataArr[i].analyzedInstructions[0].steps;
-    let ingredients = dataArr[i].missedIngredients;
-    let imageURL = dataArr[i].image;
-    let summary = dataArr[i].summary;
-    let time = dataArr[i].readyInMinutes;
+    // create new recipe instance for all returned results
+    let recipe = new Recipe(
+      dataArr[i].id,
+      dataArr[i].title,
+      dataArr[i].analyzedInstructions[0].steps,
+      dataArr[i].missedIngredients,
+      dataArr[i].image,
+      dataArr[i].summary,
+      dataArr[i].readyInMinutes
+    );
 
-    printRecipeData(title, steps, ingredients, imageURL, summary, time);
+    // print recipes to page
+    recipe.printRecipeData(recipe);
   }
 };
 
@@ -68,7 +73,6 @@ const getRecipes = function (event) {
   event.preventDefault();
   // Get user input
   let searchTerm = userSearch.val();
-  // console.log(searchTerm);
 
   // query url
   let queryURL = `https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&fillIngredients=true&addRecipeInformation=true&apiKey=fb8f9820c9b74cf1ac411198c8a4e4a0&number=50`;
@@ -81,30 +85,34 @@ const getRecipes = function (event) {
     });
 };
 
-const infoClick = function () {
+const infoClick = function (event) {
   alert("get info");
+  let id = $(event.target).parent().attr("id");
+  console.log(id);
   // To Do
   // Make modal that pops up with clicked recipe info
   // Should have recipe time, instructions, ingredients, maybe pic too?
 };
 
-const saveRecipe = function () {
+const saveRecipe = function (event) {
   alert("save this recipe!");
-  // console.log(this);
+  let id = $(event.target).parent().attr("id");
+  // console.log(id);
+  console.log($(`#${id}`).data());
   // Need some database for this part to actually save to your cookbook
 };
 
 const buttonClicks = function (event) {
   event.preventDefault();
   if (event.target.matches(".info-btn")) {
-    infoClick();
+    infoClick(event);
   }
 
   if (event.target.matches(".save-btn")) {
-    saveRecipe();
+    saveRecipe(event);
   }
 };
 
-// Click events
+// Event handlers
 searchButton.on("click", getRecipes);
 recipeContainer.on("click", buttonClicks);

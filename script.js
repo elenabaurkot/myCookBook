@@ -1,7 +1,7 @@
 // Global Variables
-var userSearch = $("#drink-search");
-var searchButton = $("#search-button");
-let recipeContainer = $("#recipe-return");
+const userSearch = $("#drink-search");
+const searchButton = $("#search-button");
+const recipeContainer = $("#recipe-return");
 
 // Recipe class constructor
 function Recipe(id, title, steps, ingredients, imgUrl, summary, time) {
@@ -26,7 +26,7 @@ Recipe.prototype.printRecipeData = function (recipe) {
   // Create card-text div
   let cardText = $("<div>");
   cardText.attr("id", `${this.id}`).addClass("card-text");
-  cardText.data(`${this.title}`, recipe);
+  cardText.data(`${this.id}`, recipe);
   // Add Recipe Title to Card
   let cardTitle = $("<div>")
     .data(`${this.id}`, this)
@@ -38,6 +38,11 @@ Recipe.prototype.printRecipeData = function (recipe) {
     .text("Save Recipe");
   let infoBtn = $("<button>")
     .addClass("recipe-btn info-btn")
+    .attr({
+      "data-bs-toggle": "modal",
+      "data-bs-target": "#recipe-modal",
+      type: "button",
+    })
     .text("Recipe Info");
   // Append Recipe Title and Buttons to cardTitle Div
   cardText.append(cardTitle, saveBtn, infoBtn);
@@ -45,8 +50,6 @@ Recipe.prototype.printRecipeData = function (recipe) {
   recipeCard.addClass("recipe-card").append(cardImg).append(cardText);
 
   recipeContainer.append(recipeCard);
-  // rSteps.forEach((recipeStep) => console.log(recipeStep.step));
-  // rIngred.forEach((ingredient) => console.log(ingredient.originalString));
 };
 
 // Loop through results
@@ -86,19 +89,38 @@ const getRecipes = function (event) {
 };
 
 const infoClick = function (event) {
-  alert("get info");
-  let id = $(event.target).parent().attr("id");
-  console.log(id);
+  // get id from parent div of button to access recipe object
+  let recipeId = $(event.target).parent().attr("id");
+  let recipeData = $(`#${recipeId}`).data();
+  let { title, steps, ingredients, imgUrl, summary, time } = recipeData[
+    recipeId
+  ];
+
+  console.log(recipeData);
+  // set modal info to recipe object data
+  $(".modal-title").text(title);
+  $(".modal-body").html(
+    `<p>${summary}</p>
+     <img src="${imgUrl}" alt="${title}-image">
+     <ul>Ingredients:
+      ${ingredients.map((ingredient) => `<li>${ingredient.name}</li>`).join("")}
+     </ul>
+     <ol>Steps:
+      ${steps.map((step) => `<li>${step.step}</li>`).join("")}
+     </ol>
+     <p>Time to make: ${time}</p>
+    `
+  );
   // To Do
   // Make modal that pops up with clicked recipe info
   // Should have recipe time, instructions, ingredients, maybe pic too?
 };
 
 const saveRecipe = function (event) {
-  alert("save this recipe!");
   let id = $(event.target).parent().attr("id");
-  // console.log(id);
-  console.log($(`#${id}`).data());
+  let recipeData = $(`#${id}`).data();
+
+  localStorage.setItem(id, JSON.stringify(recipeData));
   // Need some database for this part to actually save to your cookbook
 };
 

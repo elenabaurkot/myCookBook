@@ -74,6 +74,9 @@ const getRecipeData = function (dataArr) {
 // Recipe Search with API Call
 const getRecipes = function (event) {
   event.preventDefault();
+
+  // Clear previous searches
+  recipeContainer.empty();
   // Get user input
   let searchTerm = userSearch.val();
 
@@ -84,6 +87,8 @@ const getRecipes = function (event) {
     .then((response) => response.json())
     .then(({ results }) => {
       console.log(results);
+      // clear search
+      searchTerm = "";
       getRecipeData(results);
     });
 };
